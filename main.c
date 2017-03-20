@@ -8,22 +8,22 @@ int main()
 
     int rotate;
     char City,Plain,Road;
-    City = 'c';
-    Plain = 'p';
-    Road = 'r';
 
-    char *North = &City;
-    char *East = &Plain;
-    char *South = &Road;
-    char *West = &Road;
+    char North = 'c';
+    char East = 'p';
+    char South = 'r';
+    char West = 'r';
+    //normal char variables
 
-    printf("North : %c \n" "East : %c \n" "South : %c \n" "West : %c \n",*North,*East,*South,*West);
+    printf("North : %c \n" "East : %c \n" "South : %c \n" "West : %c \n",North,East,South,West);
 
     scanf("%d", &rotate);
 
-    rotation(rotate,North,East,South,West);
+    rotation(rotate,&North,&East,&South,&West);
+    //I use the function declared at the beginning, giving it the addresses of the variables
 
-    printf("North : %c \n" "East : %c \n" "South : %c \n" "West : %c \n",*North,*East,*South,*West);
+    printf("North : %c \n" "East : %c \n" "South : %c \n" "West : %c \n",North,East,South,West);
+    //I print the variables value after the void function
 
 
     return 0;
@@ -33,25 +33,18 @@ int main()
 void rotation(int r,char *N,char *E,char *S, char *W)
 {
     int x;
-    x=r%4;
+    x=r%4; //modulo we talked about
 
     for (int i=0;i<x;i++)
     {
-        char *temp;
-        temp= N;
-        printf("%c\n", *temp);
-
-        N=W;
-        printf("%c\n", *N);
-        W=S;
-        printf("%c\n", *E);
-        S=E;
-        printf("%c\n", *S);
-        E=temp;
-        printf("%c\n", *W);
+        char temp;
+        temp=*N;
+        *N=*W;
+        *W=*S;
+        *S=*E;
+        *E=temp;
     }
-
-    printf("North : %c \n" "East : %c \n" "South : %c \n" "West : %c \n",*N,*E,*S,*W);
+    //the loop changing the variables value
 }
 
 
