@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1490468039 source:d:\karolina\do skopiowania na dysk\wazne\university computer science\pf\algochecker\geninput\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
