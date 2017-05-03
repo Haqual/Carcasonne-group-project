@@ -9,12 +9,13 @@ char W;
 char S;
 char E; 
 char Temple;
-char Crossroad;
 char Shield;
+char Crossroad;
+
 }Tile;
 
-//void stringtoStruct (char s[],Tile t);
-//void getLibrary(Tile t);
+void stringtoStruct (int n,char s[],Tile *tile);
+void getLibrary(int n,Tile *t);
 void getTiles (int (*a)[14]);
 void rotation (int r,Tile *tile);
 void printTile(Tile *tile);
@@ -27,10 +28,10 @@ int main ()
 {
 	Tile tile1;
 	tile1.ID=2;
-	tile1.N='p';	
-	tile1.W='p';
-	tile1.S='r';
-	tile1.E='p';
+	tile1.N='P';	
+	tile1.W='P';
+	tile1.S='R';
+	tile1.E='P';
 	tile1.Temple='T';
 	tile1.Crossroad='T';
 	tile1.Shield='F';
@@ -43,9 +44,68 @@ int main ()
 	getTiles(&quant);
 	printArr(14,quant);
 	
+	char example[7] = "PPRRFFF";
+	stringtoStruct (9,example,&tile1);
+	printTile(&tile1);
+
+	Tile tiles[14];
+	getLibrary(12,&tiles[12]);
+	
+
+	printTile(&tiles[12]);
+	
+	
+	for (int i=0;i<14;i++)
+	{
+		getLibrary(i,&tiles[i]);		
+		printTile(&tiles[i]);
+	}
+
 
 
 }
+
+
+void getLibrary(int n,Tile (*t))
+{
+	FILE *f;
+	f=fopen("Library.txt","r");
+	
+	char str[8];
+
+	for (int i=0;i<28;i++)
+	{	
+		int k;
+		k=i/2;
+		fgets(str,8,(FILE*)f);
+		//printf("%d: %s\n",i,str);		
+		
+		if (n==k)		
+		{
+			//printf("%d: %s\n",i,str);		
+			stringtoStruct(n+1,str,t);
+			//printTile(t);
+			break;
+		}
+	}
+
+		
+}
+
+
+
+void stringtoStruct (int n,char s[],Tile *tile)
+{
+   tile->ID=n;
+   tile->N=s[0];
+   tile->E=s[1];
+   tile->S=s[2];
+   tile->W=s[3];
+   tile->Temple=s[4];
+   tile->Shield=s[5];
+   tile->Crossroad=s[6];	
+}
+
 
 void getTiles (int (*a)[14])
 {
